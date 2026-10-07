@@ -1,0 +1,95 @@
+﻿
++------------------------------------------------------------------+
+| PARKSMART                                      SMART PARKING    |
++------------------------------------------------------------------+
+  DASHBOARD
+  Your parking operations, organized in one place.
+  PARKED 0/15    FREE 15    WAITING 0
++------------------------------------------------------------------+
+
+  OVERVIEW
+  0 vehicles parked   |   15 slots available   |   0 vehicles waiting
+
+  PAGES
+  1  Parking operations       Arrivals, checkout, and live slots
+  2  Vehicle directory        Search, browse, and sort vehicles
+  3  Activity & history       Waiting line and entry/exit records
+  4  Reports & tools          Statistics, traffic, and analysis
+  5  Exit ParkSmart
+  Open a page: 
++------------------------------------------------------------------+
+| PARKSMART                                      SMART PARKING    |
++------------------------------------------------------------------+
+  PARKING OPERATIONS
+  Manage arrivals, departures, and the parking floor.
+  PARKED 0/15    FREE 15    WAITING 0
++------------------------------------------------------------------+
+
+  1  Park a vehicle
+  2  Check out a vehicle
+  3  View parking layout
+  4  Check available slots
+  5  Back to dashboard
+  Select an activity: 
+========== PARK VEHICLE ==========
+Vehicle Number: Owner Name: Vehicle Type (Car/Bike/EV/Truck): 
+Vehicle parked successfully!
+
+Vehicle Number : TS09AB1234
+Level          : 1
+Slot           : A1
+
++------------------------------------------------------------------+
+| PARKSMART                                      SMART PARKING    |
++------------------------------------------------------------------+
+  PARKING OPERATIONS
+  Manage arrivals, departures, and the parking floor.
+  PARKED 1/15    FREE 14    WAITING 0
++------------------------------------------------------------------+
+
+  1  Park a vehicle
+  2  Check out a vehicle
+  3  View parking layout
+  4  Check available slots
+  5  Back to dashboard
+  Select an activity: Level 1 available: 4
+Level 2 available: 5
+Level 3 available: 5
+
+Total Slots     : 15
+Occupied Slots  : 1
+Available Slots : 14
+
++------------------------------------------------------------------+
+| PARKSMART                                      SMART PARKING    |
++------------------------------------------------------------------+
+  PARKING OPERATIONS
+  Manage arrivals, departures, and the parking floor.
+  PARKED 1/15    FREE 14    WAITING 0
++------------------------------------------------------------------+
+
+  1  Park a vehicle
+  2  Check out a vehicle
+  3  View parking layout
+  4  Check available slots
+  5  Back to dashboard
+  Select an activity: 
++------------------------------------------------------------------+
+| PARKSMART                                      SMART PARKING    |
++------------------------------------------------------------------+
+  DASHBOARD
+  Your parking operations, organized in one place.
+  PARKED 1/15    FREE 14    WAITING 0
++------------------------------------------------------------------+
+
+  OVERVIEW
+  1 vehicles parked   |   14 slots available   |   0 vehicles waiting
+
+  PAGES
+  1  Parking operations       Arrivals, checkout, and live slots
+  2  Vehicle directory        Search, browse, and sort vehicles
+  3  Activity & history       Waiting line and entry/exit records
+  4  Reports & tools          Statistics, traffic, and analysis
+  5  Exit ParkSmart
+  Open a page: 
+Thank you for using ParkSmart.

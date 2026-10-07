@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="ParkSmart parking operations dashboard">
+  <title>ParkSmart | Parking operations</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#" data-page-link="dashboard" aria-label="ParkSmart dashboard">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M8 31V9h12a8 8 0 0 1 0 16h-5v6m0-13h5a2 2 0 1 0 0-4h-5"/><path d="M27 30h7m-3.5-7.5V30"/></svg>
+        </span>
+        <span><strong>park<span>smart</span></strong><small>PARKING MANAGEMENT</small></span>
+      </a>
+
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav-list">
+        <button class="nav-item active" type="button" data-page="dashboard">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="10" width="8" height="11" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/></svg></span>Dashboard
+        </button>
+        <button class="nav-item" type="button" data-page="parking">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M5 20V4h8a5 5 0 0 1 0 10H9"/><path d="M9 8v3h4a1.5 1.5 0 0 0 0-3H9"/></svg></span>Parking floor
+        </button>
+        <button class="nav-item" type="button" data-page="vehicles">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 13.5 5.2 8a2 2 0 0 1 1.9-1.3h9.8A2 2 0 0 1 18.8 8l2.2 5.5v5h-2v-2H5v2H3z"/><path d="M4 13h16M7 15h.01M17 15h.01"/></svg></span>Vehicles<span class="nav-count" id="vehicle-nav-count">0</span>
+        </button>
+        <button class="nav-item" type="button" data-page="activity">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/><circle cx="8" cy="5" r="1"/><circle cx="14" cy="12" r="1"/><circle cx="10" cy="19" r="1"/></svg></span>Activity
+        </button>
+        <button class="nav-item" type="button" data-page="reports">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 20V4m0 16h17"/><path d="m7 15 4-4 3 2 5-6"/></svg></span>Reports
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="local-note"><span class="live-dot"></span><span><strong>Local workspace</strong><small>Data saved on this device</small></span></div>
+        <div class="profile"><span class="avatar">PS</span><span><strong>Parking Admin</strong><small>Facility manager</small></span><span class="profile-menu">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><span class="crumb-divider">/</span><strong id="breadcrumb-current">Dashboard</strong></div>
+        <div class="topbar-actions">
+          <span class="today-label" id="today-label"></span>
+          <span class="connection-pill"><span class="live-dot"></span>System online</span>
+          <button class="icon-button" id="reset-button" type="button" title="Clear local demo data" aria-label="Clear local demo data">
+            <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5m4-1v5l3 2"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="page active" id="page-dashboard" aria-labelledby="dashboard-title">
+          <div class="page-heading">
+            <div><div class="eyebrow">FACILITY OVERVIEW</div><h1 id="dashboard-title">Good day, Admin <span class="wave">✦</span></h1><p>Here’s what’s happening at your parking facility today.</p></div>
+            <button class="button button-primary" type="button" data-open-park><span class="button-plus">+</span> Register vehicle</button>
+          </div>
+          <div class="metric-grid">
+            <article class="metric-card"><div class="metric-top"><span>Occupied spaces</span><span class="metric-icon icon-blue"><svg viewBox="0 0 24 24"><path d="M5 20V4h8a5 5 0 0 1 0 10H9"/><path d="M9 8v3h4a1.5 1.5 0 0 0 0-3H9"/></svg></span></div><div class="metric-value"><strong id="metric-occupied">0</strong><span id="metric-capacity">of 15 spaces</span></div><div class="metric-foot"><span class="meter"><i id="occupancy-meter"></i></span><span id="occupancy-percent">0% full</span></div></article>
+            <article class="metric-card"><div class="metric-top"><span>Available spaces</span><span class="metric-icon icon-green"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/><circle cx="12" cy="12" r="9"/></svg></span></div><div class="metric-value"><strong id="metric-available">15</strong><span>ready for arrivals</span></div><div class="metric-foot"><span class="status-text"><i class="status-dot green"></i>Live availability</span></div></article>
+            <article class="metric-card"><div class="metric-top"><span>Waiting queue</span><span class="metric-icon icon-amber"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></div><div class="metric-value"><strong id="metric-waiting">0</strong><span>vehicles in line</span></div><div class="metric-foot"><span class="status-text"><i class="status-dot amber"></i>FIFO admission</span></div></article>
+            <article class="metric-card"><div class="metric-top"><span>Today’s arrivals</span><span class="metric-icon icon-purple"><svg viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span></div><div class="metric-value"><strong id="metric-arrivals">0</strong><span>vehicles checked in</span></div><div class="metric-foot"><span class="status-text" id="metric-exits">0 departures today</span></div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel floor-panel">
+              <div class="panel-heading"><div><h2>Live parking floor</h2><p>Real-time view of all parking spaces</p></div><button class="text-button" type="button" data-navigate="parking">View floor <span>→</span></button></div>
+              <div id="dashboard-floor" class="floor-preview"></div>
+              <div class="legend"><span><i class="legend-box free"></i>Available</span><span><i class="legend-box occupied"></i>Occupied</span><span><i class="legend-box ev"></i>EV charging</span></div>
+            </section>
+            <section class="panel arrivals-panel">
+              <div class="panel-heading"><div><h2>Recent arrivals</h2><p>Latest vehicles checked in</p></div><button class="text-button" type="button" data-navigate="activity">All activity <span>→</span></button></div>
+              <div id="recent-arrivals" class="recent-list"></div>
+            </section>
+          </div>
+
+          <section class="panel queue-panel">
+            <div class="panel-heading"><div><h2>Waiting queue</h2><p>Vehicles waiting for the next available space</p></div><span class="small-count" id="queue-count">0 waiting</span></div>
+            <div id="dashboard-queue" class="queue-content"></div>
+          </section>
+        </section>
+
+        <section class="page" id="page-parking" aria-labelledby="parking-title">
+          <div class="page-heading"><div><div class="eyebrow">FACILITY MANAGEMENT</div><h1 id="parking-title">Parking floor</h1><p>Manage arrivals and monitor every parking space.</p></div><button class="button button-primary" type="button" data-open-park><span class="button-plus">+</span> Register vehicle</button></div>
+          <div class="floor-summary" id="floor-summary"></div>
+          <section class="panel full-floor-panel"><div class="panel-heading"><div><h2>Facility layout</h2><p>Select an occupied space to view its vehicle details.</p></div><span class="live-indicator"><i class="status-dot green"></i> Live view</span></div><div id="full-floor" class="full-floor"></div><div class="legend"><span><i class="legend-box free"></i>Available</span><span><i class="legend-box occupied"></i>Occupied</span><span><i class="legend-box ev"></i>EV charging</span></div></section>
+          <section class="panel"><div class="panel-heading"><div><h2>Currently parked</h2><p>Active vehicles in the facility</p></div><button class="text-button" type="button" data-navigate="vehicles">Vehicle directory <span>→</span></button></div><div id="floor-vehicle-list"></div></section>
+        </section>
+
+        <section class="page" id="page-vehicles" aria-labelledby="vehicles-title">
+          <div class="page-heading"><div><div class="eyebrow">VEHICLE MANAGEMENT</div><h1 id="vehicles-title">Vehicle directory</h1><p>Search, review, and check out vehicles in your facility.</p></div><button class="button button-primary" type="button" data-open-park><span class="button-plus">+</span> Register vehicle</button></div>
+          <section class="panel table-panel">
+            <div class="table-toolbar"><div><h2>Parked vehicles <span class="small-count" id="vehicle-count">0 vehicles</span></h2><p>Vehicle records update automatically as activity occurs.</p></div><label class="search-box"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="vehicle-search" type="search" placeholder="Search plate, owner..." aria-label="Search vehicles"></label></div>
+            <div class="table-scroll"><table><thead><tr><th>VEHICLE</th><th>OWNER</th><th>TYPE</th><th>PARKING SPACE</th><th>CHECKED IN</th><th>STATUS</th><th></th></tr></thead><tbody id="vehicle-table-body"></tbody></table></div>
+            <div class="table-footer" id="vehicle-table-footer"></div>
+          </section>
+          <section class="panel queue-panel"><div class="panel-heading"><div><h2>Waiting list</h2><p>Queued in arrival order</p></div><span class="small-count" id="vehicle-queue-count">0 waiting</span></div><div id="vehicle-queue"></div></section>
+        </section>
+
+        <section class="page" id="page-activity" aria-labelledby="activity-title">
+          <div class="page-heading"><div><div class="eyebrow">OPERATIONS LOG</div><h1 id="activity-title">Activity &amp; history</h1><p>Follow arrivals, departures, and queued vehicles.</p></div></div>
+          <div class="metric-grid compact-metrics"><article class="metric-card"><div class="metric-top"><span>Total entries</span><span class="metric-icon icon-blue">↘</span></div><div class="metric-value"><strong id="history-entry-count">0</strong><span>recorded check-ins</span></div></article><article class="metric-card"><div class="metric-top"><span>Total departures</span><span class="metric-icon icon-purple">↗</span></div><div class="metric-value"><strong id="history-exit-count">0</strong><span>completed check-outs</span></div></article><article class="metric-card"><div class="metric-top"><span>Currently waiting</span><span class="metric-icon icon-amber">◷</span></div><div class="metric-value"><strong id="history-waiting-count">0</strong><span>in arrival queue</span></div></article></div>
+          <section class="panel"><div class="panel-heading"><div><h2>Recent activity</h2><p>Most recent events appear first.</p></div></div><div id="activity-list"></div></section>
+          <section class="panel queue-panel"><div class="panel-heading"><div><h2>Waiting queue</h2><p>First in, first admitted when a space opens.</p></div><span class="small-count" id="activity-queue-count">0 waiting</span></div><div id="activity-queue"></div></section>
+        </section>
+
+        <section class="page" id="page-reports" aria-labelledby="reports-title">
+          <div class="page-heading"><div><div class="eyebrow">FACILITY INSIGHTS</div><h1 id="reports-title">Reports</h1><p>Current occupancy, vehicle mix, and parking revenue.</p></div><span class="report-date" id="report-date"></span></div>
+          <div class="metric-grid compact-metrics"><article class="metric-card"><div class="metric-top"><span>Occupancy rate</span><span class="metric-icon icon-blue">%</span></div><div class="metric-value"><strong id="report-occupancy">0%</strong><span>of total capacity</span></div><div class="metric-foot"><span class="meter"><i id="report-meter"></i></span></div></article><article class="metric-card"><div class="metric-top"><span>Entries today</span><span class="metric-icon icon-green">↘</span></div><div class="metric-value"><strong id="report-arrivals">0</strong><span>parked today</span></div></article><article class="metric-card"><div class="metric-top"><span>Fees collected</span><span class="metric-icon icon-purple">₹</span></div><div class="metric-value"><strong id="report-revenue">₹0</strong><span>total recorded check-outs</span></div></article></div>
+          <div class="dashboard-grid report-grid"><section class="panel"><div class="panel-heading"><div><h2>Vehicle mix</h2><p>Currently parked by vehicle type</p></div></div><div id="vehicle-mix" class="mix-list"></div></section><section class="panel"><div class="panel-heading"><div><h2>Hourly parking rates</h2><p>Minimum billable duration: one hour</p></div></div><div class="rates-list"><div><span><i class="vehicle-dot car"></i>Car</span><strong>₹20 <small>/ hour</small></strong></div><div><span><i class="vehicle-dot bike"></i>Bike</span><strong>₹10 <small>/ hour</small></strong></div><div><span><i class="vehicle-dot ev"></i>Electric vehicle</span><strong>₹25 <small>/ hour</small></strong></div><div><span><i class="vehicle-dot truck"></i>Truck</span><strong>₹40 <small>/ hour</small></strong></div></div></section></div>
+          <section class="panel"><div class="panel-heading"><div><h2>Recent check-outs</h2><p>Completed visits and calculated fees</p></div></div><div id="report-checkouts"></div></section>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="park-dialog" id="park-dialog" aria-labelledby="dialog-title">
+    <form id="park-form" method="dialog">
+      <div class="dialog-heading"><div><div class="eyebrow">NEW ARRIVAL</div><h2 id="dialog-title">Register a vehicle</h2><p>Enter the vehicle details to assign a parking space.</p></div><button class="icon-button close-button" type="button" data-close-dialog aria-label="Close dialog">×</button></div>
+      <label class="field-label" for="plate-input">Vehicle registration number</label><input class="form-control" id="plate-input" name="plate" placeholder="e.g. KA 01 AB 1234" maxlength="20" required autocomplete="off">
+      <label class="field-label" for="owner-input">Owner name</label><input class="form-control" id="owner-input" name="owner" placeholder="Full name" maxlength="60" required autocomplete="name">
+      <label class="field-label" for="type-input">Vehicle type</label><select class="form-control" id="type-input" name="type" required><option value="">Select a vehicle type</option><option>Car</option><option>Bike</option><option>EV</option><option>Truck</option></select>
+      <div class="form-note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span>If all 15 spaces are occupied, this vehicle will be added to the waiting queue.</span></div>
+      <div class="dialog-actions"><button class="button button-quiet" type="button" data-close-dialog>Cancel</button><button class="button button-primary" type="submit">Register vehicle</button></div>
+    </form>
+  </dialog>
+  <dialog class="details-dialog" id="details-dialog" aria-labelledby="details-title"><div id="details-content"></div></dialog>
+  <div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
+</body>
+</html>
